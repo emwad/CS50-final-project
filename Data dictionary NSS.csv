@@ -1,0 +1,15 @@
+﻿Column,NSS notes,Further notes
+UKPRN,Provider Reference Number,Unique identifier for provider
+PROVIDER_NAME,Name of provider,
+SUBJECT_LEVEL,"CAH1, CAH2, CAH3, All subjects"," ""All subjects"" - equivalent to provider-level. ""CAH1"" - 21 groups. ""CAH2"" - 35 groups. ""CAH3"" - 167 groups."
+QUESTION_NUMBER,Question number (see Survey questions tab),
+CAH_CODE,Subject Code,Identifier of the specific subject of the course
+CAH_NAME,Subject Name,Name of the specific subject of the course
+NUMBER_RESPONSES,Full person equivalent number of responses to each question (excluding 'This does not apply to me'),
+NUMBER_POPULATION,Full person equivalent number of eligible students,
+SUPPRESSION_REASON,"Reason for suppression, DPH ('Data protection high') or DPL ('Data protection low')",
+POSITIVITY_MEASURE,Positivity Measure (percentage),"For themes, a percentage calculated with an algorithm that takes into account all questions in that theme and their responses."
+BENCHMARK,Benchmark,The average positivity measure for similar providers
+DIFFERENCE,Difference between indicator and benchmark,
+PUB_RESPONSE_HEADCOUNT,Publication response headcount (includes those who responded Not applicable),
+PUB_RESPRATE,Publication Response Rate (includes those who responded Not applicable),
