@@ -10,7 +10,7 @@ My 'UK NSS Tool' aims to do this. For this project, I have limited the scope to 
 ### Sourcing/cleaning data: 
 The data was sourced from the Office for Students NSS official site ([URL](https://www.officeforstudents.org.uk/data-and-analysis/national-student-survey-data/download-the-nss-data/)). I used the "teach_ft" 2025 data set, that compares the institutions which _delivered_ teaching to students. For the time being, I have limited comparison to full time students only.
 
-I checked and cleaned the data using the Python pandas library, on a Jupyter notebook in an Anaconda environment, reading the CSV file into a dataframe. The "NSS.ipynb" file is the Jupyter notebook I used to do this, annotated with the steps taken. The cleaned data file is included: "NSS_themes.csv". The original csv file can be found in [this download](https://blobofsproduks.blob.core.windows.net/files/NSS/2025/publication_csv_cuts.zip) as "teach_ft.csv".
+I checked and cleaned the data using the Python pandas library, on a Jupyter notebook in an Anaconda environment (environment.yml), reading the CSV file into a dataframe. The "NSS.ipynb" file is the Jupyter notebook I used to do this, annotated with the steps taken. The cleaned data file is included: "NSS_themes.csv". The original csv file can be found in [this download](https://blobofsproduks.blob.core.windows.net/files/NSS/2025/publication_csv_cuts.zip) as "teach_ft.csv".
 
 Details of columns are listed in "Data dictionary NSS.csv".
 
