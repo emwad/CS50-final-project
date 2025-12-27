@@ -1,11 +1,35 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<section id="top-bar">
-    
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <a class="navbar-brand" href="/">NSS Explorer</a>
+</nav>
+
+<section id="section1">
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md border border-primary rounded p-1 m-1">
+            <h1 class="display-6 text-primary">First institution</h1>
+            <form action="/" method="post">
+                <div class="mb-3">
+                    <label for="inst1" class="form-label">Name</label>
+                    <input name="inst1" type="text" class="form-control" id="inst1" placeholder="Enter institution name">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div class="col-md border border-primary rounded p-1 m-1">
+            <h1 class="display-6 text-primary">Second institution</h1>
+            <form action="/" method="post">
+                <div class="mb-3">
+                    <label for="inst2" class="form-label">Name</label>
+                    <input name="inst2" type="text" class="form-control" id="inst2" placeholder="Enter institution name">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
 </section>
-<h1 class="display-1">Hello.</h1>
-<h2 class="display-6">Heading 6.</h2>
-<p class="text-primary">Theming text</p>
-<button class="btn btn-outline-primary">Button</button>
+
 {% endblock %}
