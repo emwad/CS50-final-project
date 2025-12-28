@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <a class="navbar-brand" href="/">NSS Explorer</a>
+</nav>
+
+<h1 class="display-1">{{ inst1.PROVIDER_NAME }}</h1>
+<table class="d-table">
+    <thead>
+        <tr>
+            <td>UKPRN</td>
+            <td>Name</td>
+            <td>Address</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ inst1.UKPRN }}</td>
+            <td>{{ inst.PROVIDER_NAME }}</td>
+            <td>{{ inst.town }}, {{ inst.postcode }}</td>
+        </tr>
+    </tbody>
+</table>
+
+
+{% endblock %}

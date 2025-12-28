@@ -1,6 +1,10 @@
 # UK National Student Survey Comparison Tool
 #### Video Demo:  <URL HERE>
 #### Description:
+
+#TO DO:
+    Check dataset - UKPRNs in both tables match same institution names. Then add address validation in for users when selecting options.
+
 The National Student Survey (NSS) is a yearly survey conducted throughout the UK by final year undergraduate students at Universities (there are other modes of study, but this is what I have focused on for the comparison tool).
 
 Whilst there are online tools for prospective students to interpret results and view information about specific institutions/courses compared to national benchmarks, there is not currently a tool that allows students to directly compare two different insitutions' results.
