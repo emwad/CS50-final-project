@@ -17,15 +17,32 @@ def index():
 
         # Note - fetchone() brings back 1 row, fetchall() LIST of rows 
         # (so will need cycling through in template)
-        # this bit just checking i can bring back the right info for now
+
+        import io
+        import base64
+        import matplotlib.pyplot as plt
+
         rows = db.execute("SELECT * FROM nss WHERE ukprn = ?", (ukprn1,)).fetchone()
         rows2 = db.execute("SELECT * FROM nss WHERE ukprn = ?", (ukprn2,)).fetchone()
-        plt.barh([rows["PROVIDER_NAME"], rows2["PROVIDER_NAME"]], 
-                 [rows["POSITIVITY_MEASURE"], rows2["POSITIVITY_MEASURE"]])
-        plt.ylabel("Institution")
-        plt.xlabel("Positivity measure") 
-        plt.title("Horizontal bar graph")
-        chart = plt.show()
-        return render_template('comparison.html', inst1=rows, inst2=rows2, chart=chart)
+
+        # Create the figure
+        fig, ax = plt.subplots()
+        ax.barh(
+            [rows["PROVIDER_NAME"], rows2["PROVIDER_NAME"]],
+            [rows["POSITIVITY_MEASURE"], rows2["POSITIVITY_MEASURE"]]
+        )
+        ax.set_ylabel("Institution")
+        ax.set_xlabel("Positivity measure")
+        ax.set_title("Horizontal bar graph")
+
+        # Save to buffer
+        buf = io.BytesIO()
+        fig.savefig(buf, format="png", bbox_inches="tight")
+        buf.seek(0)
+
+        # Encode
+        chart = base64.b64encode(buf.getvalue()).decode("utf-8")
+
+        return render_template("comparison.html", inst1=rows, inst2=rows2, chart=chart)
 
     return render_template('index.html')
