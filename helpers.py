@@ -30,3 +30,27 @@ def inst(UKPRN, THEME_IDs):
 
     rows = db.execute(query, (UKPRN, *THEME_IDs)).fetchall()
     return rows
+
+# encodes a matplotlib chart to base64 string for embedding in HTML
+def generate_chart(rows, rows2):
+    import io
+    import base64
+    import matplotlib.pyplot as plt
+    
+    # Create the figure
+    fig, ax = plt.subplots()
+    ax.barh(
+        [rows["PROVIDER_NAME"], rows2["PROVIDER_NAME"]],
+        [rows["POSITIVITY_MEASURE"], rows2["POSITIVITY_MEASURE"]]
+    )
+    ax.set_ylabel("Institution")
+    ax.set_xlabel("Positivity measure")
+    ax.set_title("Horizontal bar graph")
+
+    # Save to buffer
+    buf = io.BytesIO()
+    fig.savefig(buf, format="png", bbox_inches="tight")
+    buf.seek(0)
+
+    # Encode
+    return base64.b64encode(buf.getvalue()).decode("utf-8")

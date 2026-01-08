@@ -9,11 +9,21 @@
             <form action="/" method="post">
                 <div class="mb-3">
                     <label for="inst1" class="form-label">First institution:</label>
-                    <input name="inst1" type="text" class="form-control" id="inst1" placeholder="Enter institution name">
+                    <input list="providers" name="inst1" class="form-control" placeholder="Start typing name">
+                    <datalist id="providers">
+                        {% for row in providers %}
+                            <option value="{{ row['PROVIDER_NAME'] }}">
+                        {% endfor %}
+                    </datalist>
                 </div>
                 <div class="mb-3">
                     <label for="inst2" class="form-label">Second institution:</label>
-                    <input name="inst2" type="text" class="form-control" id="inst2" placeholder="Enter institution name">
+                    <input list="providers" name="inst2" class="form-control" placeholder="Start typing name">
+                    <datalist id="providers">
+                        {% for row in providers %}
+                            <option value="{{ row['PROVIDER_NAME'] }}">
+                        {% endfor %}
+                    </datalist>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
