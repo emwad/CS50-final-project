@@ -6,24 +6,18 @@
     <div class="row">
         <div class="col-md border border-primary rounded p-1 m-1">
             <h1 class="display-6 text-primary">Institutions</h1>
-            <form action="/" method="post">
-                <div class="mb-3">
-                    <label for="inst1" class="form-label">First institution:</label>
-                    <input list="providers" name="inst1" class="form-control" placeholder="Start typing name">
-                    <datalist id="providers">
-                        {% for row in providers %}
-                            <option value="{{ row['PROVIDER_NAME'] }}">
-                        {% endfor %}
-                    </datalist>
+            <form autocomplete="off" action="/" method="post">
+                <div class="mb-3 position-relative autocomplete">
+                    <label for="inst1" class="form-label">First Institution</label>
+                    <input type="text" id="inst1_name" name="inst1_name" class="form-control" placeholder="Start typing an institution name">
+                    <input type="hidden" id="inst1_id" name="inst1_id">
+
                 </div>
-                <div class="mb-3">
-                    <label for="inst2" class="form-label">Second institution:</label>
-                    <input list="providers" name="inst2" class="form-control" placeholder="Start typing name">
-                    <datalist id="providers">
-                        {% for row in providers %}
-                            <option value="{{ row['PROVIDER_NAME'] }}">
-                        {% endfor %}
-                    </datalist>
+                <div class="mb-3 position-relative autocomplete">
+                    <label for="inst2" class="form-label">Second Institution</label>
+                    <input type="search" id="inst2_name" name="inst2_name" class="form-control" placeholder="Start typing an institution name">
+                    <input type="hidden" id="inst2_id" name="inst2_id">
+
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
@@ -31,5 +25,47 @@
     </div>
 </div>
 </section>
+
+<script>
+function setupAutocomplete(nameInputId, hiddenIdInputId) {
+    const nameInput = document.getElementById(nameInputId);
+    const hiddenInput = document.getElementById(hiddenIdInputId);
+
+    const dropdown = document.createElement("div");
+    dropdown.classList.add("autocomplete-items", "list-group");
+    nameInput.parentNode.appendChild(dropdown);
+
+    nameInput.addEventListener("input", async function () {
+        const query = this.value.trim();
+        dropdown.innerHTML = "";
+        hiddenInput.value = "";  // clear previous selection
+
+        if (query.length < 2) return;
+
+        const res = await fetch(`/autocomplete?q=${encodeURIComponent(query)}`);
+        const items = await res.json();
+
+        items.forEach(item => {
+            const option = document.createElement("div");
+            option.textContent = item.name;
+            option.classList.add("autocomplete-item", "list-group-item", "list-group-item-action");
+
+            option.addEventListener("click", () => {
+                nameInput.value = item.name;
+                hiddenInput.value = item.ukprn;
+                dropdown.innerHTML = "";
+            });
+
+            dropdown.appendChild(option);
+        });
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    setupAutocomplete("inst1_name", "inst1_id");
+    setupAutocomplete("inst2_name", "inst2_id");
+});
+</script>
+
 
 {% endblock %}
