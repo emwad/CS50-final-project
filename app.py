@@ -14,13 +14,28 @@ def index():
     if request.method == "POST":
         ukprn1 = int(request.form.get("inst1_id"))
         ukprn2 = int(request.form.get("inst2_id"))
+        themes = [int(t) for t in request.form.getlist("themes[]")]
 
-        row = db.execute("SELECT * FROM nss WHERE ukprn = ?", (ukprn1,)).fetchone()
-        row2 = db.execute("SELECT * FROM nss WHERE ukprn = ?", (ukprn2,)).fetchone()
+        if not themes or not ukprn1 or not ukprn2:
+            providers = db.execute("SELECT DISTINCT PROVIDER_NAME, UKPRN FROM nss ORDER BY PROVIDER_NAME").fetchall()
+            provider_list = [{"name": row["PROVIDER_NAME"], "ukprn": row["UKPRN"]} for row in providers]
+            return render_template('index.html', providers=provider_list, message="Please select two institutions and at least one theme to compare.")
 
-        chart = generate_chart(row, row2)
+        theme_info = [None] * len(themes)
+        charts = [None] * len(themes)
 
-        return render_template("comparison.html", inst1=row, inst2=row2, chart=chart)
+        for i, theme in enumerate(themes):
+            temp1 = db.execute("SELECT * FROM nss WHERE ukprn = ? AND theme_id = ?", (ukprn1, theme)).fetchone()
+            temp2 = db.execute("SELECT * FROM nss WHERE ukprn = ? AND theme_id = ?", (ukprn2, theme)).fetchone()
+
+            theme_info[i] = db.execute(
+                "SELECT theme_id, question_number FROM themes WHERE theme_id = ?",
+                (theme,)
+            ).fetchone()
+
+            charts[i] = generate_chart(temp1, temp2)
+
+        return render_template("comparison.html", themes=theme_info, charts=charts)
 
     #GET
     providers = db.execute("SELECT DISTINCT(PROVIDER_NAME), UKPRN FROM nss ORDER BY PROVIDER_NAME").fetchall()

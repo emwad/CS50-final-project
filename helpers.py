@@ -54,3 +54,4 @@ def generate_chart(rows, rows2):
 
     # Encode
     return base64.b64encode(buf.getvalue()).decode("utf-8")
+

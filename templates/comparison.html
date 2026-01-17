@@ -2,9 +2,11 @@
 
 {% block body %}
     <div class="col-md border border-primary rounded p-1 m-1">
-        <h1 class="display-6 text-primary">Theme 1 Positivity Measure</h1>
-        <div class="center">
-            <img src="data:image/png;base64,{{ chart }}" alt="Comparison chart">
-        </div>
+        {% for chart in charts %}
+            <h1 class="display-6 text-primary">{{ themes[loop.index0].QUESTION_NUMBER }}</h1>
+            <div class="center">
+                <img src="data:image/png;base64,{{ chart }}" alt="Comparison chart">
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
