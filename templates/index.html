@@ -5,21 +5,59 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md border border-primary rounded p-1 m-1">
-            <h1 class="display-6 text-primary">Institutions</h1>
             <form autocomplete="off" action="/" method="post">
-                <div class="mb-3 position-relative autocomplete">
-                    <label for="inst1" class="form-label">First Institution</label>
-                    <input type="text" id="inst1_name" name="inst1_name" class="form-control" placeholder="Start typing an institution name">
-                    <input type="hidden" id="inst1_id" name="inst1_id">
+                <div class="row">     
+                    <div class="col">
+                        <h1 class="display-6 text-primary">Institutions</h1>
+                        <div class="mb-3 position-relative autocomplete">
+                            <label for="inst1" class="form-label">First Institution</label>
+                            <input type="text" id="inst1_name" name="inst1_name" class="form-control" placeholder="Start typing an institution name">
+                            <input type="hidden" id="inst1_id" name="inst1_id">
 
+                        </div>
+                        <div class="mb-3 position-relative autocomplete">
+                            <label for="inst2" class="form-label">Second Institution</label>
+                            <input type="search" id="inst2_name" name="inst2_name" class="form-control" placeholder="Start typing an institution name">
+                            <input type="hidden" id="inst2_id" name="inst2_id">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h1 class="display-6 text-primary">Select themes to compare</h1>
+                            <div class="mb-3 position-relative form-check">
+                                <input class="form-check-input" onClick="checkAll(this)" type="checkbox" id="All" name="All" value="All">
+                                <label class="form-check-label">Select All</label>
+                            </div>
+                            <div class="position-relative form-check">
+                                <input class="form-check-input" type="checkbox" id="Theme1" name="Theme1" value="Theme1">
+                                <label class="form-check-label">Theme 1: Teaching on my course</label>
+                            </div>
+                            <div class="position-relative form-check">
+                                <input class="form-check-input" type="checkbox" id="Theme2" name="Theme2" value="Theme2">
+                                <label class="form-check-label">Theme 2: Learning opportunities</label>
+                            </div>
+                            <div class="position-relative form-check">
+                                <input class="form-check-input" type="checkbox" id="Theme3" name="Theme3" value="Theme3">
+                                <label class="form-check-label">Theme 3: Assessment and feedback</label>
+                            </div>
+                            <div class="position-relative form-check">
+                                <input class="form-check-input" type="checkbox" id="Theme4" name="Theme4" value="Theme4">
+                                <label class="form-check-label">Theme 4: Academic support</label>
+                            </div>
+                            <div class="position-relative form-check">
+                                <input class="form-check-input" type="checkbox" id="Theme5" name="Theme5" value="Theme5">
+                                <label class="form-check-label">Theme 5: Organisation and management</label>
+                            </div>
+                            <div class="position-relative form-check">
+                                <input class="form-check-input" type="checkbox" id="Theme6" name="Theme6" value="Theme6">
+                                <label class="form-check-label">Theme 6: Learning resources</label>
+                            </div>
+                            <div class="mb-3 position-relative form-check">
+                                <input class="form-check-input" type="checkbox" id="Theme7" name="Theme7" value="Theme7">
+                                <label class="form-check-label">Theme 7: Student voice</label>
+                            </div>
+                    </div>
                 </div>
-                <div class="mb-3 position-relative autocomplete">
-                    <label for="inst2" class="form-label">Second Institution</label>
-                    <input type="search" id="inst2_name" name="inst2_name" class="form-control" placeholder="Start typing an institution name">
-                    <input type="hidden" id="inst2_id" name="inst2_id">
-
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
@@ -65,6 +103,13 @@ document.addEventListener("DOMContentLoaded", () => {
     setupAutocomplete("inst1_name", "inst1_id");
     setupAutocomplete("inst2_name", "inst2_id");
 });
+
+function checkAll(source) {
+    checkboxes = document.getElementsByClassName('form-check-input');
+    for(var i=0, n=checkboxes.length;i<n;i++) {
+        checkboxes[i].checked = source.checked;
+    }
+}
 </script>
 
 
