@@ -1,6 +1,5 @@
 from flask import Flask, jsonify, render_template, request
 from helpers import close_db, generate_chart, inst, get_db
-import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 

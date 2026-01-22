@@ -5,7 +5,7 @@
         {% for chart in charts %}
             <h1 class="display-6 text-primary">{{ themes[loop.index0].QUESTION_NUMBER }}</h1>
             <div class="center">
-                <img src="data:image/png;base64,{{ chart }}" alt="Comparison chart">
+                <img class="img-fluid" src="data:image/png;base64,{{ chart }}" alt="Comparison chart">
             </div>
         {% endfor %}
     </div>

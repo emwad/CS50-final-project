@@ -36,16 +36,30 @@ def generate_chart(rows, rows2):
     import io
     import base64
     import matplotlib.pyplot as plt
-    
-    # Create the figure
+    import matplotlib.ticker as mtick
+
+    values = [rows["POSITIVITY_MEASURE"], rows2["POSITIVITY_MEASURE"]]
+    labels = [rows["PROVIDER_NAME"], rows2["PROVIDER_NAME"]]
+
+    # Identify highest and lowest
+    max_index = values.index(max(values))
+    min_index = values.index(min(values))
+
+    # Build colour list
+    colors = ["#ffc107"] * len(values)
+    colors[max_index] = "#198754"    # highest
+
     fig, ax = plt.subplots()
-    ax.barh(
-        [rows["PROVIDER_NAME"], rows2["PROVIDER_NAME"]],
-        [rows["POSITIVITY_MEASURE"], rows2["POSITIVITY_MEASURE"]]
-    )
-    ax.set_ylabel("Institution")
+    ax.barh(labels, values, color=colors)
+
     ax.set_xlabel("Positivity measure")
-    ax.set_title("Horizontal bar graph")
+    ax.set_xlim(0, 100)
+
+    ax.xaxis.set_major_formatter(mtick.PercentFormatter())
+    ax.bar_label(ax.containers[0], fmt="%.1f%%")
+
+    fig.set_figheight(2)
+    fig.set_figwidth(10)
 
     # Save to buffer
     buf = io.BytesIO()
