@@ -46,8 +46,11 @@ def generate_chart(rows, rows2):
     min_index = values.index(min(values))
 
     # Build colour list
-    colors = ["#ffc107"] * len(values)
-    colors[max_index] = "#198754"    # highest
+    if max_index == min_index:
+        colors = ["#ffc107"] * len(values)  # all same
+    else:
+        colors = ["#ffc107"] * len(values)
+        colors[max_index] = "#198754"    # highest
 
     fig, ax = plt.subplots()
     ax.barh(labels, values, color=colors)

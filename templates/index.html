@@ -13,16 +13,26 @@
 <section id="section1">
 <div class="container mt-4">
     <div class="row">
-        <div class="col-md border border-primary rounded p-1 m-1">
+        <div class="col-md text-center">
+            <h1 class="display-6 text-primary">Compare Higher Education Institutions by NSS Results</h1>
+            <p>
+                Use the form below to compare two higher education institutions based on their National Student Survey (NSS) results. Select the institutions you wish to compare and choose the themes you are interested in.
+            </p>
+            <p>
+                NOTE: This tool is designed only to give you a quick comparison between two institutions, and only gives information on responses from full time undergraduates in 24/25. Data is taken from the <a class="link-info link-opacity-50-hover" href="https://www.officeforstudents.org.uk/for-students/understanding-students/national-student-survey/latest-nss-results/">NSS official website</a>, where you can find more information on the NSS and detailed breakdowns for each provider.</p>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md bg-light rounded p-1 m-1">
             <form autocomplete="off" action="/" method="post">
                 <div class="row">     
                     <div class="col">
-                        <h1 class="display-6 text-primary">Institutions</h1>
+                        <h3>Institutions</h3>
                         <div class="mb-3 position-relative autocomplete">
                             <label for="inst1" class="form-label">First Institution</label>
                             <input type="text" id="inst1_name" name="inst1_name" class="form-control" placeholder="Start typing an institution name">
                             <input type="hidden" id="inst1_id" name="inst1_id">
-
                         </div>
                         <div class="mb-3 position-relative autocomplete">
                             <label for="inst2" class="form-label">Second Institution</label>
@@ -31,7 +41,8 @@
                         </div>
                     </div>
                     <div class="col">
-                        <h1 class="display-6 text-primary">Select themes to compare</h1>
+                        <h3>Select themes to compare</h3>
+                        <a class=" link-info link-opacity-50-hover" href="themes">What are themes, and why are we using them?</a><br><br>
                             <div class="mb-3 position-relative form-check">
                                 <input class="form-check-input" onClick="checkAll(this)" type="checkbox" id="All" name="All" value="All">
                                 <label class="form-check-label">Select All</label>
@@ -66,7 +77,9 @@
                             </div>
                     </div>
                 </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-outline-primary">Submit</button>
+            </div>
             </form>
         </div>
     </div>

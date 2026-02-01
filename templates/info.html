@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container">
+    <div class="row m-3 p-3">
+        <h3>NSS Themes</h3>
+        <p>
+            'Themes' offer a quick overview of key areas covered in the National Student Survey (NSS). They group related questions to help you easily assess different aspects of student experience at higher education institutions. By focusing on themes, you can compare institutions based on specific areas that matter most to you, such as teaching quality, learning resources, and student support.
+        </p>
+        <p>
+            For now, this site only allows comparison based on themes, rather than individual questions. This is so that two institutions can be easily and quickly compared, giving you a rough overview before you dive deeper into the data on the NSS official website. 
+        </p>
+        <p>    
+            For a more detailed breakdown of the questions for each insitution, you can visit the NSS official website:
+        </p>
+        <a class="link-info link-opacity-50-hover" href="https://www.officeforstudents.org.uk/data-and-analysis/national-student-survey-data/provider-level-dashboard/">NSS Official Website</a><br>
+        <a class="link-info link-opacity-50-hover" href="/">Back to Comparison Page</a>
+    </div>
+    <div class="row m-3 p-3">
+        <h3>Positivity Measure</h3>
+        <p>Taken from <a class="link-info link-opacity-50-hover" href="https://www.officeforstudents.org.uk/data-and-analysis/national-student-survey-data/about-the-nss-data/">the NSS Official Website FAQ.</a><br>
+            The positivity measure for each question is the proportion of respondents who gave a positive answer. The positive answers are the first two possible answers to the question. 
+            <br><br>
+            For example, the first NSS question is “How good are teaching staff at explaining things?” The response options are:
+            <ul>
+                <li>Very good</li>
+                <li>Good</li>
+                <li>Not very good</li>
+                <li>Not at all good</li>
+                <li>This does not apply to me</li>
+            </ul>
+            In this case, we calculate the positivity measure by dividing the number of students who answered “Very good” and “Good” by the number of students who gave one of the first four response options. We express this as a percentage.
+            <br><br>
+            In calculating the positivity measure, we do not include students who responded “This does not apply to me”.
+            <br><br>
+        </p>
+    </div>
+</div>
+{% endblock %}

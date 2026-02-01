@@ -24,8 +24,11 @@ def index():
         charts = [None] * len(themes)
 
         for i, theme in enumerate(themes):
-            temp1 = db.execute("SELECT * FROM nss WHERE ukprn = ? AND theme_id = ?", (ukprn1, theme)).fetchone()
-            temp2 = db.execute("SELECT * FROM nss WHERE ukprn = ? AND theme_id = ?", (ukprn2, theme)).fetchone()
+            temp1 = db.execute("SELECT * FROM nss WHERE SUBJECT_LEVEL = 'All subjects' AND ukprn = ? AND theme_id = ?", (ukprn1, theme)).fetchone()
+            temp2 = db.execute("SELECT * FROM nss WHERE SUBJECT_LEVEL = 'All subjects' AND ukprn = ? AND theme_id = ?", (ukprn2, theme)).fetchone()
+
+            if temp1 is None or temp2 is None:
+                return render_template('index.html', providers=provider_list, message=f"Theme {theme} not available for one or both institutions.")
 
             theme_info[i] = db.execute(
                 "SELECT theme_id, question_number FROM themes WHERE theme_id = ?",
@@ -41,6 +44,10 @@ def index():
     provider_list = [{"name": row["PROVIDER_NAME"], "ukprn": row["UKPRN"]} for row in providers]
     return render_template('index.html', providers=provider_list)
 
+@app.route("/info")
+def info():
+    return render_template("info.html")
+
 @app.route("/autocomplete")
 def autocomplete():
     db = get_db()
@@ -55,3 +62,6 @@ def autocomplete():
         for row in rows
     ])
 
+@app.route("/themes")
+def themes():
+    return render_template("info.html")

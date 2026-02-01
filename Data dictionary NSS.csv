@@ -1,6 +1,7 @@
 ﻿Column,NSS notes,Further notes
 UKPRN,Provider Reference Number,Unique identifier for provider
 PROVIDER_NAME,Name of provider,
+LEVEL_OF_STUDY,"All Undergraduates" or other,We will only be using "All Undergraduates"
 SUBJECT_LEVEL,"CAH1, CAH2, CAH3, All subjects"," ""All subjects"" - equivalent to provider-level. ""CAH1"" - 21 groups. ""CAH2"" - 35 groups. ""CAH3"" - 167 groups."
 QUESTION_NUMBER,Question number (see Survey questions tab),
 CAH_CODE,Subject Code,Identifier of the specific subject of the course
