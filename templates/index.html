@@ -2,7 +2,7 @@
 
 {% block body %}
 <section id="error">
-    <div class="container">
+    <div class="container-fluid mt-4">
         <div class="row">
             <div class="col-md text-center">
                 <p class="lead">{{ message }}</p>
@@ -11,9 +11,9 @@
     </div>
 </section>
 <section id="section1">
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-md text-center">
+<div class="container-fluid">
+    <div class="row px-4">
+        <div class="col text-center">
             <h1 class="display-6 text-primary">Compare Higher Education Institutions by NSS Results</h1>
             <p>
                 Use the form below to compare two higher education institutions based on their National Student Survey (NSS) results. Select the institutions you wish to compare and choose the themes you are interested in.
@@ -23,65 +23,67 @@
             </p>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md bg-light rounded p-1 m-1">
-            <form autocomplete="off" action="/" method="post">
-                <div class="row">     
-                    <div class="col">
+    <div>
+        <form autocomplete="off" action="/" method="post">
+            <div class="container-fluid">
+                <div class="row bg-light rounded m-4 p-3">
+                    <div class="col-12 col-sm-6 mb-3">
                         <h3>Institutions</h3>
                         <div class="mb-3 position-relative autocomplete">
-                            <label for="inst1" class="form-label">First Institution</label>
-                            <input type="text" id="inst1_name" name="inst1_name" class="form-control" placeholder="Start typing an institution name">
+                            <label for="inst1_name" class="form-label">First Institution</label>
+                            <input type="text" id="inst1_name" name="inst1_name"
+                                class="form-control"
+                                placeholder="Start typing an institution name">
                             <input type="hidden" id="inst1_id" name="inst1_id">
                         </div>
                         <div class="mb-3 position-relative autocomplete">
-                            <label for="inst2" class="form-label">Second Institution</label>
-                            <input type="search" id="inst2_name" name="inst2_name" class="form-control" placeholder="Start typing an institution name">
+                            <label for="inst2_name" class="form-label">Second Institution</label>
+                            <input type="search" id="inst2_name" name="inst2_name"
+                                class="form-control"
+                                placeholder="Start typing an institution name">
                             <input type="hidden" id="inst2_id" name="inst2_id">
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-12 col-sm-6 mb-3">
                         <h3>Select themes to compare</h3>
-                        <a class=" link-info link-opacity-50-hover" href="themes">What are themes, and why are we using them?</a><br><br>
-                            <div class="mb-3 position-relative form-check">
-                                <input class="form-check-input" onClick="checkAll(this)" type="checkbox" id="All" name="All" value="All">
-                                <label class="form-check-label">Select All</label>
-                            </div>
-                            <div class="position-relative form-check">
-                                <input class="form-check-input" type="checkbox" id="1" name="themes[]" value="1">
-                                <label class="form-check-label">Theme 1: Teaching on my course</label>
-                            </div>
-                            <div class="position-relative form-check">
-                                <input class="form-check-input" type="checkbox" id="2" name="themes[]" value="2">
-                                <label class="form-check-label">Theme 2: Learning opportunities</label>
-                            </div>
-                            <div class="position-relative form-check">
-                                <input class="form-check-input" type="checkbox" id="3" name="themes[]" value="3">
-                                <label class="form-check-label">Theme 3: Assessment and feedback</label>
-                            </div>
-                            <div class="position-relative form-check">
-                                <input class="form-check-input" type="checkbox" id="4" name="themes[]" value="4">
-                                <label class="form-check-label">Theme 4: Academic support</label>
-                            </div>
-                            <div class="position-relative form-check">
-                                <input class="form-check-input" type="checkbox" id="5" name="themes[]" value="5">
-                                <label class="form-check-label">Theme 5: Organisation and management</label>
-                            </div>
-                            <div class="position-relative form-check">
-                                <input class="form-check-input" type="checkbox" id="6" name="themes[]" value="6">
-                                <label class="form-check-label">Theme 6: Learning resources</label>
-                            </div>
-                            <div class="mb-3 position-relative form-check">
-                                <input class="form-check-input" type="checkbox" id="7" name="themes[]" value="7">
-                                <label class="form-check-label">Theme 7: Student voice</label>
-                            </div>
+                        <a class="link-info link-opacity-50-hover" href="themes">
+                            What are themes, and why are we using them?
+                        </a>
+                        <br><br>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" onClick="checkAll(this)"
+                                type="checkbox" id="All" name="All" value="All">
+                            <label class="form-check-label" for="All">Select All</label>
+                        </div>
+                        {% for i, label in [
+                            (1, "Teaching on my course"),
+                            (2, "Learning opportunities"),
+                            (3, "Assessment and feedback"),
+                            (4, "Academic support"),
+                            (5, "Organisation and management"),
+                            (6, "Learning resources"),
+                            (7, "Student voice")
+                        ] %}
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox"
+                                id="{{ i }}" name="themes[]" value="{{ i }}">
+                            <label class="form-check-label" for="{{ i }}">
+                                Theme {{ i }}: {{ label }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-center mb-4">
+                        <button type="submit" class="btn btn-outline-primary px-4">
+                            Submit
+                        </button>
                     </div>
                 </div>
-            <div class="d-grid gap-2 col-6 mx-auto">
-            <button type="submit" class="btn btn-outline-primary">Submit</button>
             </div>
-            </form>
-        </div>
+        </form>
     </div>
 </div>
 </section>
