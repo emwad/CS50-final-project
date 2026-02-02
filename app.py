@@ -12,8 +12,8 @@ def index():
     db = get_db()
     #POST
     if request.method == "POST":
-        ukprn1 = int(request.form.get("inst1_id"))
-        ukprn2 = int(request.form.get("inst2_id"))
+        ukprn1 = request.form.get("inst1_id")
+        ukprn2 = request.form.get("inst2_id")
         themes = [int(t) for t in request.form.getlist("themes[]")]
 
         if not themes or not ukprn1 or not ukprn2:
@@ -21,6 +21,9 @@ def index():
             provider_list = [{"name": row["PROVIDER_NAME"], "ukprn": row["UKPRN"]} for row in providers]
             return render_template('index.html', providers=provider_list, message="Please select two institutions and at least one theme to compare.")
 
+        ukprn1 = int(ukprn1)
+        ukprn2 = int(ukprn2)
+        
         theme_info = [None] * len(themes)
         charts = [None] * len(themes)
 
