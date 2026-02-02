@@ -3,6 +3,8 @@ from flask import g
 
 DATABASE = "nss.db"
 
+# Functions to get and close a database connection. This was suggested by Microsoft Copilot AI, when querying
+# how to properly open and close database connections in Flask.
 def get_db():
     if "db" not in g:
         conn = sqlite3.connect(DATABASE)
@@ -15,23 +17,8 @@ def close_db(exception):
     if db is not None:
         db.close()
 
-
-# Function that takes an institution UKPRN, and a list of theme IDs, 
-# and returns an object containing info filtered to that.
-
-def inst(UKPRN, THEME_IDs):
-    if not THEME_IDs:
-        return []
-
-    db = get_db()
-
-    placeholders = ",".join(["?"] * len(THEME_IDs))
-    query = f"SELECT * FROM nss WHERE UKPRN = ? AND THEME_ID IN ({placeholders})"
-
-    rows = db.execute(query, (UKPRN, *THEME_IDs)).fetchall()
-    return rows
-
 # encodes a matplotlib chart to base64 string for embedding in HTML
+# the technicalities of this function were assisted by Microsoft Copilot AI
 def generate_chart(rows, rows2):
     import io
     import base64

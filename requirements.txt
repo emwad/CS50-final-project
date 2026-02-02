@@ -1,3 +1,7 @@
 Flask
-Pandas (?)
-Matplotlib
+sqlite3
+io
+base64
+matplotlib
+matplotlib.pyplot
+matplotlib.ticker

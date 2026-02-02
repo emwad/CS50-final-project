@@ -1,9 +1,10 @@
 from flask import Flask, jsonify, render_template, request
-from helpers import close_db, generate_chart, inst, get_db
+from helpers import close_db, generate_chart, get_db
 
 app = Flask(__name__)
 
-# Register teardown handler
+# Register teardown handler. This was suggested by Microsoft Copilot AI, when querying
+# how to properly open and close database connections in Flask.
 app.teardown_appcontext(close_db)
 
 @app.route('/', methods=["GET", "POST"])
@@ -23,6 +24,7 @@ def index():
         theme_info = [None] * len(themes)
         charts = [None] * len(themes)
 
+        # Microsoft Copilot AI suggested the 'enumerate' function during error checking
         for i, theme in enumerate(themes):
             temp1 = db.execute("SELECT * FROM nss WHERE SUBJECT_LEVEL = 'All subjects' AND ukprn = ? AND theme_id = ?", (ukprn1, theme)).fetchone()
             temp2 = db.execute("SELECT * FROM nss WHERE SUBJECT_LEVEL = 'All subjects' AND ukprn = ? AND theme_id = ?", (ukprn2, theme)).fetchone()
@@ -44,10 +46,12 @@ def index():
     provider_list = [{"name": row["PROVIDER_NAME"], "ukprn": row["UKPRN"]} for row in providers]
     return render_template('index.html', providers=provider_list)
 
+# Further info on NSS Themes and Positivity Measure.
 @app.route("/info")
 def info():
     return render_template("info.html")
 
+# Autocomplete function on the user form. Microsoft Copilot AI assisted in tweaking this function after I initially wrote it.
 @app.route("/autocomplete")
 def autocomplete():
     db = get_db()
@@ -61,7 +65,3 @@ def autocomplete():
         {"ukprn": row["ukprn"], "name": row["provider_name"]}
         for row in rows
     ])
-
-@app.route("/themes")
-def themes():
-    return render_template("info.html")
